@@ -10,6 +10,8 @@ import PhotoCardOverlay from '@/components/ui/PhotoCardOverlay';
 import { createPortal } from "react-dom";
 
 import photos from "/data/photos.js";
+import HeroSection from '@/components/ui/HeroSection';
+import Navbar from '@/components/ui/NavBar';
 
 
 
@@ -30,21 +32,36 @@ function Home() {
 
     return (
         <>
-            <div className="max-w-7xl mx-auto p-4 sm:px-6 lg:px-8" >
+
+            <Navbar hidden={!!selectedPhoto} />
+
+            <div id="hero">
+                <HeroSection imageUrl={"/images/hero_image.jpg"} title={"Maryna Papuna"} />
+
+
+            </div>
 
 
 
 
-                <div>
-                    <div className="p-8 text-center">
-                        <h1 className="text-4xl font-bold mb-4">Welcome to my Portfolio</h1>
-                        <p className="text-gray-700">Here is some example content.</p>
+
+            <div id="portfolio">
+
+                <div className="max-w-7xl mx-auto p-6 sm:px-6 lg:px-8" >
+
+
+
+                    <div>
+                        <div className="pt-8 pb-3 text-center">
+                            <h1 className="pt-5 text-5xl font-bold mb-4">Welcome to my Portfolio</h1>
+                            <p className=" p-3 text-base leading-relaxed text-gray-700">Here is some example content.</p>
+                        </div>
                     </div>
+
+                    <PortfolioGrid photos={photos} selectedPhoto={selectedPhoto} onPhotoClick={handlePhotoClick} />
+
                 </div>
 
-
-
-                <PortfolioGrid photos={photos} selectedPhoto={selectedPhoto} onPhotoClick={handlePhotoClick} />
 
 
                 <AnimatePresence>

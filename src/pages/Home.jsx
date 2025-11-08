@@ -9,6 +9,8 @@ import PhotoCardOverlay from '@/components/ui/PhotoCardOverlay';
 
 import { createPortal } from "react-dom";
 
+import photos from "/data/photos.js";
+
 
 
 
@@ -36,65 +38,61 @@ function Home() {
             </div>
 
 
-            <PortfolioGrid onPhotoClick={handlePhotoClick} />
+            <PortfolioGrid photos={photos} selectedPhoto={selectedPhoto} onPhotoClick={handlePhotoClick} />
 
 
             <AnimatePresence>
-
-                {/* Modal (Overlay) */}
                 {selectedPhoto && (
-
                     <>
+                        {/* Background overlay */}
+                        <motion.div
+                            className="fixed inset-0 bg-black/95 z-40" 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            onClick={handleCloseOverlay} 
+                        />
 
-
-                        <div
-                            className="fixed inset-0 flex items-center justify-center z-50 p-4"
+                        {/* Close button */}
+                        <motion.div
+                            className="fixed top-4 right-4 z-50"
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
                         >
-
-                            <motion.div
-                                className="fixed inset-0 bg-black z-10"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 0.8 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.3 }}
-                            />
-
-
-
-                            <motion.div
-                                className="fixed top-4 right-4 z-20"
-                                initial={{ opacity: 0, y: -20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
+                            <Button
+                                className="rounded-4xl"
+                                size="sm"
+                                variant="secondary"
+                                onClick={handleCloseOverlay} 
                             >
-                                <Button className="rounded-4xl" size="sm" variant="secondary" onClick={handleCloseOverlay}>X</Button>
-                            </motion.div>
-                            <div className="fixed inset-0 flex items-center justify-center z-[100] p-4 pointer-events-none">
-                                <motion.div
-                                    layoutId={`photo-${selectedPhoto.id}`}
-                                    className="pointer-events-auto w-full max-w-3xl z-[200]" // <-- THIS IS THE FIX
-                                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                >
-                                    <PhotoCardOverlay photo={selectedPhoto} />
-                                </motion.div>
+                                X
+                            </Button>
+                        </motion.div>
+
+                        {/* Image container */}
+                        <motion.div
+                            className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        >
+                            <div
+                                className="pointer-events-auto"
+                                onClick={(e) => e.stopPropagation()} 
+                            >
+                                <img
+                                    src={selectedPhoto.imageUrl}
+                                    alt={selectedPhoto.title}
+                                    className="max-w-3xl w-full h-auto rounded-lg shadow-lg"
+                                />
                             </div>
-
-
-
-
-                        </div>
-
-
-
-
+                        </motion.div>
                     </>
-
-                )
-
-
-
-                }
+                )}
             </AnimatePresence>
         </>
     );

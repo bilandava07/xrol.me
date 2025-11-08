@@ -1,7 +1,6 @@
 import PhotoCard from "./PhotoCard";
-import photos from "/data/photos.js";
 
-export default function PortfolioGrid({onPhotoClick}) {
+export default function PortfolioGrid({ photos, selectedPhoto, onPhotoClick}) {
 
 
   return (
@@ -12,7 +11,7 @@ export default function PortfolioGrid({onPhotoClick}) {
           id={photo.id}
           title={photo.title}
           imageUrl={photo.imageUrl}
-          layoutId={`photo-${photo.id}`}
+          hidden={selectedPhoto?.id === photo.id}
           onClick={() => onPhotoClick(photo)}
         />
       ))}

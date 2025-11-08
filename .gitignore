@@ -22,4 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
 build_and_copy_dist_to_deployment.sh
+public

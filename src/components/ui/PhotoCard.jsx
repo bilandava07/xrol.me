@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 
 
-function PhotoCard({ title, id, imageUrl, hidden, onClick }) {
+function PhotoCard({ title, id, imageUrl, onClick }) {
   return (
 
     <motion.div

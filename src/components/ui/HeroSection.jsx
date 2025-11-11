@@ -23,6 +23,7 @@ function HeroSection({ imageUrl, title }) {
                 <motion.div
                     initial={{ opacity: 0 }}            
                     whileInView={{ opacity: 1 }}       
+                    viewport={{ once: true }}
                     transition={{ duration: 5, ease: "easeOut" }} 
                 >
                     <h1 className="text-white/75 text-4xl sm:text-5xl md:text-6xl font-bold text-center px-4">

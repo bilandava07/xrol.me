@@ -20,7 +20,7 @@ function HeroSection({ imageUrl, title }) {
 
             {/* Centered text */}
             <div className="relative z-10 flex items-center justify-center h-full">
-                <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold text-center px-4">
+                <h1 className="text-white/70 text-4xl sm:text-5xl md:text-6xl font-bold text-center px-4">
                     {title}
                 </h1>
             </div>

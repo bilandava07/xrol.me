@@ -57,19 +57,19 @@ function Navbar({ darkMode, setDarkMode }) {
                     <div className="hidden md:flex items-center space-x-6 text-lg ">
                         <a
                             href="#hero"
-                            className="inline-block hover:text-foreground/80 hover:scale-105 transition-transform duration-300"
+                            className="inline-block hover:scale-105 transition-transform duration-300"
                         >
                             Home
                         </a>
                         <a
                             href="#portfolio"
-                            className="inline-block hover:text-foreground/70 hover:scale-105 transition-transform duration-300"
+                            className="inline-block  hover:scale-105 transition-transform duration-300"
                         >
                             Portfolio
                         </a>
                         <a
                             href="#contact"
-                            className="inline-block hover:text-foreground/70 hover:scale-105 transition-transform duration-300"
+                            className="inline-block  hover:scale-105 transition-transform duration-300"
                         >
                             Contact
                         </a>

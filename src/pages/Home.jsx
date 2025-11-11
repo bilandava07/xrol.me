@@ -2,18 +2,16 @@
 import PortfolioGrid from '@/components/ui/PortfolioGird';
 import PhotoCard from '@/components/ui/PhotoCard'
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import PhotoCardOverlay from '@/components/ui/PhotoCardOverlay';
 
-import { createPortal } from "react-dom";
 
 import photos from "/data/photos.js";
 import HeroSection from '@/components/ui/HeroSection';
 import Navbar from '@/components/ui/NavBar';
 import PhotoCarousel from '@/components/ui/PhotoCarousel';
 import MotionCarousel from '@/components/ui/MotionCarousel';
+import PhotoOverlay from '@/components/ui/PhotoOverlay';
 
 
 
@@ -25,6 +23,27 @@ import MotionCarousel from '@/components/ui/MotionCarousel';
 function Home() {
 
     const [selectedPhoto, setSelectedPhoto] = useState(null);
+
+    const [darkMode, setDarkMode] = useState(() => {
+        // Check if the user has a stored preference first
+        const stored = localStorage.getItem("theme");
+        if (stored) return stored === "dark";
+
+        // Otherwise, use system preference
+        return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    });
+
+    useEffect(() => {
+        // Apply the theme to the document root
+        if (darkMode) {
+            document.documentElement.classList.add("dark");
+            localStorage.setItem("theme", "dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+            localStorage.setItem("theme", "light");
+        }
+    }, [darkMode]);
+
 
     function handlePhotoClick(photo) {
         setSelectedPhoto(photo);
@@ -39,10 +58,16 @@ function Home() {
     return (
         <>
 
-            <Navbar hidden={!!selectedPhoto} />
+            <Navbar
+                darkMode={darkMode}
+                setDarkMode={setDarkMode}
+            />
+
+
+
 
             <div id="hero">
-                <HeroSection imageUrl={"/images/hero_image.jpg"} title={"Maryna Papuna"} />
+                <HeroSection imageUrl={"/images/hero_image.jpg"} title={"Vladimir Papuna"} />
 
 
             </div>
@@ -50,90 +75,29 @@ function Home() {
 
 
 
-
-            <div id="portfolio">
-
-                <div className="max-w-[80vw] mx-auto p-6 sm:px-6 lg:px-8" >
+            <div className="max-w-[80vw] mx-auto p-6 sm:px-6 lg:px-8" >
 
 
-                    <PhotoCarousel photos={photos} onPhotoClick={handlePhotoClick} />
+                <PhotoCarousel photos={photos} onPhotoClick={handlePhotoClick} />
 
-                    <div>
-                        <div className="pt-8 pb-3 text-center">
-                            <h1 className="pt-5 text-5xl font-bold mb-4">Nature</h1>
-                            <p className=" p-3 text-base leading-relaxed text-gray-700">Here is some example content.</p>
-                        </div>
+                <div>
+                    <div className="pt-8 pb-3 text-center">
+                        <h1 className="pt-5 text-5xl font-bold mb-4">Nature</h1>
+                        <p className=" p-3 text-base leading-relaxed text-gray-700">Here is some example content.</p>
                     </div>
+                </div>
+
+                <div id="portfolio">
 
                     <PortfolioGrid photos={photos} selectedPhoto={selectedPhoto} onPhotoClick={handlePhotoClick} />
 
-
                 </div>
-
-
 
             </div>
 
+            {/* Only shown when photo is selected */}
 
-
-
-
-            {/* Overlay */}
-
-            <AnimatePresence>
-                {selectedPhoto && (
-                    <>
-                        {/* Background overlay */}
-                        <motion.div
-                            className="fixed inset-0 bg-black/95 z-40"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            onClick={handleCloseOverlay}
-                        />
-
-                        {/* Close button */}
-                        <motion.div
-                            className="fixed top-4 right-4 z-50"
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <Button
-                                className="rounded-4xl cursor-pointer"
-                                size="sm"
-                                variant="secondary"
-                                onClick={handleCloseOverlay}
-                            >
-                                X
-                            </Button>
-                        </motion.div>
-
-                        {/* Image container */}
-                        <motion.div
-                            className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none"
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{ duration: 0.3, ease: 'easeInOut' }}
-                        >
-                            <div
-                                className="pointer-events-auto"
-                                onClick={(e) => e.stopPropagation()}
-                            >
-                                <img
-                                    src={selectedPhoto.imageUrl}
-                                    alt={selectedPhoto.title}
-                                    className="max-w-full max-h-[90vh]  rounded-lg shadow-lg"
-                                />
-                            </div>
-                        </motion.div>
-                    </>
-                )}
-            </AnimatePresence>
-
+            <PhotoOverlay selectedPhoto={selectedPhoto} handleCloseOverlay={handleCloseOverlay} />
 
         </>
 

@@ -12,6 +12,7 @@ import Navbar from '@/components/ui/NavBar';
 import PhotoCarousel from '@/components/ui/PhotoCarousel';
 import MotionCarousel from '@/components/ui/MotionCarousel';
 import PhotoOverlay from '@/components/ui/PhotoOverlay';
+import ContactSection from '@/components/ui/ContactSection';
 
 
 
@@ -80,20 +81,27 @@ function Home() {
 
                 <PhotoCarousel photos={photos} onPhotoClick={handlePhotoClick} />
 
+                <div id="portfolio">
+
                 <div>
                     <div className="pt-8 pb-3 text-center">
                         <h1 className="pt-5 text-5xl font-bold mb-4">Nature</h1>
-                        <p className=" p-3 text-base leading-relaxed text-gray-700">Here is some example content.</p>
+                        <p className=" p-3 text-base leading-relaxed text-accent-foreground">Here is some example content.</p>
                     </div>
                 </div>
-
-                <div id="portfolio">
 
                     <PortfolioGrid photos={photos} selectedPhoto={selectedPhoto} onPhotoClick={handlePhotoClick} />
 
                 </div>
 
             </div>
+
+            <div id='contact'>
+                <ContactSection />
+
+
+            </div>
+
 
             {/* Only shown when photo is selected */}
 

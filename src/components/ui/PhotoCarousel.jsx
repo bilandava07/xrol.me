@@ -41,11 +41,11 @@ function PhotoCarousel({ photos, onPhotoClick }) {
                   className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/3 pl-2 md:pl-4 cursor-pointer"
                   onClick={() => onPhotoClick(photo)}
                 >
-                  <div className="w-full aspect-[4/3]">
+                  <div className="w-full aspect-[4/3] rounded-xl overflow-hidden shadow-xl">
                     <img
                       src={photo.imageUrl}
                       alt={`Carousel ${i}`}
-                      className="rounded-xl object-cover w-full h-full"
+                      className="object-cover w-full h-full"
                     />
                   </div>
                 </CarouselItem>

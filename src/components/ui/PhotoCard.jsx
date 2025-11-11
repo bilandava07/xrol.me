@@ -14,7 +14,7 @@ function PhotoCard({ title, id, imageUrl, onClick }) {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
 
-      <Card className="w-auto overflow-hidden aspect-w-16 aspect-h-9 shadow-2xl"
+      <Card className="w-auto overflow-hidden aspect-w-16 aspect-h-9 shadow-2xl cursor-pointer"
         onClick={onClick}
       >
         <CardContent className="p-0 ">

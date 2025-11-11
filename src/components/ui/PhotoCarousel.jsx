@@ -33,12 +33,12 @@ function PhotoCarousel({ photos, onPhotoClick }) {
           }}
           className="w-full mx-auto"
         >
-          <div className="px-5">
+          <div className="">
             <CarouselContent className="-ml-2 md:-ml-4">
               {photos.map((photo, i) => (
                 <CarouselItem
                   key={i}
-                  className="basis-1/2 sm:basis-1/3 md:basis-1/3 lg:basis-1/3 pl-2 md:pl-4 cursor-pointer"
+                  className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/3 pl-2 md:pl-4 cursor-pointer"
                   onClick={() => onPhotoClick(photo)}
                 >
                   <div className="w-full aspect-[4/3]">
@@ -57,10 +57,11 @@ function PhotoCarousel({ photos, onPhotoClick }) {
 
 
           {/* Left fade */}
-          <div className="absolute left-0 top-0 h-full w-5 pointer-events-none bg-gradient-to-r from-white/100 to-white/0"></div>
+          {/* <div className="absolute left-0 top-0 h-full w-3 pointer-events-none bg-gradient-to-r from-background/100 to-background/0"></div> */}
 
           {/* Right fade */}
-          <div className="absolute right-0 top-0 h-full w-5 pointer-events-none bg-gradient-to-l from-white/100 to-white/0"></div>
+
+          {/* <div className="absolute right-0 top-0 h-full w-3 pointer-events-none bg-gradient-to-l from-background/100 to-background/0"></div> */}
 
         </Carousel>
       </div>

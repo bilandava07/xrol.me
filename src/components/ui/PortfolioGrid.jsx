@@ -1,4 +1,5 @@
 import { CATEGORIES } from "@/constants/photo_categories";
+import { SHORT_CATEGORIES } from "@/constants/short_photo_categories";
 import PhotoCard from "./PhotoCard";
 
 import { useState } from "react";
@@ -31,20 +32,21 @@ export default function PortfolioGrid({ photos, onPhotoClick }) {
 
           <div className='flex justify-center py-10 '>
 
-            <div className="hidden md:flex items-center space-x-10 text-xl">
-              {Object.values(CATEGORIES).map((cat) => (
+            <div className="flex flex-wrap justify-center items-center text-base gap-x-7 gap-y-2 sm:gap-x-4 md:gap-x-3 lg:gap-x-10 text-center md:text-xl">
+              {Object.keys(CATEGORIES).map((catKey) => (
                 <li
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`inline-block cursor-pointer hover:scale-105 transition-transform duration-200 ${selectedCategory === cat
-                    ? " text-foreground" // Highlight active category
-                    : "text-foreground/60"
+                  key={catKey}
+                  onClick={() => setSelectedCategory(CATEGORIES[catKey])}
+                  className={`inline-block cursor-pointer hover:scale-105 transition-transform duration-200 ${selectedCategory === CATEGORIES[catKey] ? "text-foreground" : "text-foreground/60"
                     }`}
                 >
-                  {cat}
+                  <span className="block md:hidden">{SHORT_CATEGORIES[catKey]}</span>
+                  <span className="hidden md:block">{CATEGORIES[catKey]}</span>
                 </li>
               ))}
             </div>
+
+
 
           </div>
         </div>

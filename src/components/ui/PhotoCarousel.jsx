@@ -4,15 +4,10 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-
 import { motion } from "framer-motion";
-
-
 import Autoplay from "embla-carousel-autoplay";
 
-
 function PhotoCarousel({ photos, onPhotoClick }) {
-
   let latest_photos = photos.slice(0, 6);
 
   const plugin = React.useRef(
@@ -20,7 +15,6 @@ function PhotoCarousel({ photos, onPhotoClick }) {
   );
 
   return (
-
     <motion.div
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
@@ -28,18 +22,15 @@ function PhotoCarousel({ photos, onPhotoClick }) {
       viewport={{ once: false, amount: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-
-
-
-
       <div className="pt-8 pb-3 text-center">
         <h1 className="pt-5 text-5xl font-bold my-4">Latest work</h1>
       </div>
 
-
-      <div className="w-full overflow-hidden bg-transparent my-4"
+      <div
+        className="w-full overflow-hidden bg-transparent my-4"
         onMouseEnter={() => plugin.current.stop()}
-        onMouseLeave={() => plugin.current.play()}>
+        onMouseLeave={() => plugin.current.play()}
+      >
         <Carousel
           plugins={[plugin.current]}
           opts={{
@@ -58,36 +49,30 @@ function PhotoCarousel({ photos, onPhotoClick }) {
                   className="basis-full sm:basis-1/2 md:basis-1/4 lg:basis-1/4 pl-3 md:pl-3 lg:pl-6 cursor-pointer"
                   onClick={() => onPhotoClick(photo)}
                 >
-                  <div className="w-full aspect-[4/3] rounded-xl overflow-hidden shadow-xl">
+                  <div className="w-full aspect-[4/3] rounded-xl overflow-hidden shadow-xl relative group">
+                    {/* Image */}
                     <img
                       src={photo.imageUrl}
                       alt={`Carousel ${i}`}
-                      className="object-cover w-full h-full"
+                      className="object-cover w-full h-full rounded-xl transform transition-transform duration-700 group-hover:scale-110"
                     />
+
+                    {/* Dark overlay */}
+                    <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-45 transition-opacity duration-500 rounded-xl"></div>
+
+                    {/* Text overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center text-white text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl">
+                      {photo.title}
+                    </div>
                   </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-
-
           </div>
-
-
-          {/* Left fade */}
-          {/* <div className="absolute left-0 top-0 h-full w-3 pointer-events-none bg-gradient-to-r from-background/100 to-background/0"></div> */}
-
-          {/* Right fade */}
-
-          {/* <div className="absolute right-0 top-0 h-full w-3 pointer-events-none bg-gradient-to-l from-background/100 to-background/0"></div> */}
-
         </Carousel>
       </div>
-
-
     </motion.div>
-
-
   );
 }
 
-export default PhotoCarousel
+export default PhotoCarousel;

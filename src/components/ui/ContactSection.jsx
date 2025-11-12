@@ -2,11 +2,13 @@ import React from "react";
 import { SiInstagram, SiYoutube, SiTelegram } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 
-function ContactSection({handleOpenContactOverlay}) {
+function ContactSection({ handleOpenContactOverlay }) {
+
+
   return (
-    <section className="bg-foreground/90 text-background py-10 px-6 md:px-16">
-      <div className="max-w-7xl mx-auto flex flex-row items-center justify-between">
-        
+    <section className="backdrop-blur-md bg-white/5 shadow-2xl/50 py-7 md:py-8 lg:py-9 px-6 md:px-16">
+      <div className="max-w-[80vw] mx-auto flex flex-row items-center justify-between">
+
         {/* Social Icons */}
         <div className="flex space-x-6 md:mb-0">
           <a
@@ -40,7 +42,7 @@ function ContactSection({handleOpenContactOverlay}) {
         {/* Contact Me Button */}
         <Button
           href="#contact"
-          className="flex items-center space-x-2 bg-accent text-foreground hover:bg-accent/85 transition-colors"
+          className="flex items-center space-x-2 bg-accent-foreground text-background hover:bg-accent-foreground/85 transition-colors"
           onClick={handleOpenContactOverlay}
         >
           <span>Contact Me</span>

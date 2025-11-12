@@ -1,12 +1,12 @@
 
-import PortfolioGrid from '@/components/ui/PortfolioGird';
+import PortfolioGrid from '@/components/ui/PortfolioGrid';
 import PhotoCard from '@/components/ui/PhotoCard'
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 
 
 
-import photos from "/data/photos.js";
+import photos from "@/data/photos.js";
 import HeroSection from '@/components/ui/HeroSection';
 import Navbar from '@/components/ui/NavBar';
 import PhotoCarousel from '@/components/ui/PhotoCarousel';
@@ -76,19 +76,12 @@ function Home() {
 
 
 
-            <div className="max-w-[80vw] mx-auto p-6 sm:px-6 lg:px-8" >
+            <div className="max-w-[85vw] mx-auto p-6 sm:px-6 lg:px-8" >
 
 
                 <PhotoCarousel photos={photos} onPhotoClick={handlePhotoClick} />
 
-                <div id="portfolio">
-
-                <div>
-                    <div className="pt-8 pb-3 text-center">
-                        <h1 className="pt-5 text-5xl font-bold mb-4">Nature</h1>
-                        <p className=" p-3 text-base leading-relaxed text-accent-foreground">Here is some example content.</p>
-                    </div>
-                </div>
+                <div id="portfolio" className='sd:scroll-mt-5 md:scroll-mt-0 lg:scroll-mt-0'>
 
                     <PortfolioGrid photos={photos} selectedPhoto={selectedPhoto} onPhotoClick={handlePhotoClick} />
 

@@ -13,6 +13,7 @@ import PhotoCarousel from '@/components/ui/PhotoCarousel';
 import MotionCarousel from '@/components/ui/MotionCarousel';
 import PhotoOverlay from '@/components/ui/PhotoOverlay';
 import ContactSection from '@/components/ui/ContactSection';
+import ContactOverlay from '@/components/ui/ContactOverlay';
 
 
 
@@ -24,6 +25,7 @@ import ContactSection from '@/components/ui/ContactSection';
 function Home() {
 
     const [selectedPhoto, setSelectedPhoto] = useState(null);
+    const [contactOverlay, setContactOverlay] = useState(false)
 
     const [darkMode, setDarkMode] = useState(() => {
         // Check if the user has a stored preference first
@@ -46,6 +48,21 @@ function Home() {
     }, [darkMode]);
 
 
+    // Disable scroll when any overlay is open
+    const isOverlayOpen = selectedPhoto !== null || contactOverlay;
+
+    useEffect(() => {
+        if (isOverlayOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [isOverlayOpen]);
+
+
     function handlePhotoClick(photo) {
         setSelectedPhoto(photo);
     }
@@ -54,6 +71,13 @@ function Home() {
         setSelectedPhoto(null);
     }
 
+    function handleOpenContactOverlay() {
+        setContactOverlay(true);
+    }
+
+    function handleCloseContactOverlay() {
+        setContactOverlay(false);
+    }
 
 
     return (
@@ -90,7 +114,7 @@ function Home() {
             </div>
 
             <div id='contact'>
-                <ContactSection />
+                <ContactSection handleOpenContactOverlay={handleOpenContactOverlay} />
 
 
             </div>
@@ -99,6 +123,11 @@ function Home() {
             {/* Only shown when photo is selected */}
 
             <PhotoOverlay selectedPhoto={selectedPhoto} handleCloseOverlay={handleCloseOverlay} />
+
+
+            {/* Only shown when contact overlay is opened */}
+
+            <ContactOverlay contactOverlay={contactOverlay} handleCloseContactOverlay={handleCloseContactOverlay} />
 
         </>
 

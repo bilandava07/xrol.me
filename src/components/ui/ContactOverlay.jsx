@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
-import ContactForm from '../ContactForm';
+import ContactForm from './ContactForm';
 
 function ContactOverlay({contactOverlay, handleCloseContactOverlay}) {
   return (

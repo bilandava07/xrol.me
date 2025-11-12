@@ -1,5 +1,5 @@
 import React from "react";
-import { Instagram, Youtube, Send } from "lucide-react";
+import { SiInstagram, SiYoutube, SiTelegram } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 
 function ContactSection() {
@@ -8,13 +8,33 @@ function ContactSection() {
       <div className="max-w-7xl mx-auto flex flex-row items-center justify-between">
         
         {/* Social Icons */}
-        <div className="flex space-x-6 md:mb-0 ">
-          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:scale-120 transition-transform duration-300">
-            <Youtube className=" w-7 h-7 md:w-10 md:h-10" />
+        <div className="flex space-x-6 md:mb-0">
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:scale-110 transition-transform duration-300"
+          >
+            <SiInstagram className="w-7 h-7 md:w-7 md:h-10" />
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:scale-120 transition-transform duration-300">
-            <Instagram className="w-7 h-7 md:w-10 md:h-10" />
+          <a
+            href="https://t.me"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:scale-110 transition-transform duration-300"
+          >
+            <SiTelegram className="w-7 h-7 md:w-7 md:h-10" />
           </a>
+          <a
+            href="https://youtube.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:scale-110 transition-transform duration-300"
+          >
+            <SiYoutube className="w-7 h-7 md:w-8 md:h-10" />
+          </a>
+
+
         </div>
 
         {/* Contact Me Button */}

@@ -26,7 +26,7 @@ export default function PortfolioGrid({ photos, onPhotoClick }) {
   return (
     <>
       <div>
-        <div className="pt-2 md:pt-20 text-center">
+        <div className="pt-2 md:pt-10 lg:pt-20 text-center">
 
           <h1 className="pt-5 text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Portfolio</h1>
 

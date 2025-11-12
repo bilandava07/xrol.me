@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 function ContactSection() {
   return (
-    <section className="bg-foreground/90 text-background py-20 px-6 md:px-16">
+    <section className="bg-foreground/90 text-background py-10 px-6 md:px-16">
       <div className="max-w-7xl mx-auto flex flex-row items-center justify-between">
         
         {/* Social Icons */}

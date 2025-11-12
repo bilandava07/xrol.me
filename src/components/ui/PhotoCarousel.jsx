@@ -12,15 +12,18 @@ import Autoplay from "embla-carousel-autoplay";
 
 
 function PhotoCarousel({ photos, onPhotoClick }) {
+
+  let latest_photos = photos.slice(0, 6);
+
   const plugin = React.useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: false })
+    Autoplay({ delay: 4000, stopOnInteraction: true })
   );
 
   return (
 
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.7 }}
       viewport={{ once: false, amount: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
@@ -34,23 +37,25 @@ function PhotoCarousel({ photos, onPhotoClick }) {
       </div>
 
 
-      <div className="w-full overflow-hidden bg-transparent my-4">
+      <div className="w-full overflow-hidden bg-transparent my-4"
+        onMouseEnter={() => plugin.current.stop()}
+        onMouseLeave={() => plugin.current.play()}>
         <Carousel
           plugins={[plugin.current]}
           opts={{
             align: "start",
             loop: true,
             speed: 20,
-            duration: 60
+            duration: 60,
           }}
           className="w-full mx-auto"
         >
           <div className="">
             <CarouselContent className="-ml-2 md:-ml-4">
-              {photos.map((photo, i) => (
+              {latest_photos.map((photo, i) => (
                 <CarouselItem
                   key={i}
-                  className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/3 pl-2 md:pl-4 cursor-pointer"
+                  className="basis-full sm:basis-1/2 md:basis-1/4 lg:basis-1/4 pl-3 md:pl-3 lg:pl-6 cursor-pointer"
                   onClick={() => onPhotoClick(photo)}
                 >
                   <div className="w-full aspect-[4/3] rounded-xl overflow-hidden shadow-xl">

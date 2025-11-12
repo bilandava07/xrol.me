@@ -11,7 +11,7 @@ function PhotoCard({ title, id, imageUrl, onClick }) {
       whileInView={{ opacity: 1, y: 0 }}      
       viewport={{ once: true, amount: 0.7 }} 
       viewport={{ once: false, amount: 0 }} 
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
     >
 
       <Card className="w-auto overflow-hidden aspect-w-16 aspect-h-9 shadow-2xl cursor-pointer"

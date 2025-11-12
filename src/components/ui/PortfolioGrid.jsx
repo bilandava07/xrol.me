@@ -26,13 +26,13 @@ export default function PortfolioGrid({ photos, onPhotoClick }) {
   return (
     <>
       <div>
-        <div className="pt-20 text-center">
+        <div className="pt-2 md:pt-20 text-center">
 
-          <h1 className="pt-5 text-5xl font-bold mb-4">Portfolio</h1>
+          <h1 className="pt-5 text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Portfolio</h1>
 
-          <div className='flex justify-center py-10 '>
+          <div className='flex justify-center py-3 md:py-10 '>
 
-            <div className="flex flex-wrap justify-center items-center text-base gap-x-7 gap-y-2 sm:gap-x-4 md:gap-x-3 lg:gap-x-10 text-center md:text-xl">
+            <div className="flex flex-wrap justify-center items-center text-base gap-x-5 gap-y-2  sm:gap-x-4 md:gap-x-3 lg:gap-x-10 text-center md:text-xl">
               {Object.keys(CATEGORIES).map((catKey) => (
                 <li
                   key={catKey}

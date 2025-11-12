@@ -22,8 +22,8 @@ function PhotoCarousel({ photos, onPhotoClick }) {
       viewport={{ once: false, amount: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className="pt-8 pb-3 text-center">
-        <h1 className="pt-5 text-5xl font-bold my-4">Latest work</h1>
+      <div className=" md:pt-8 pb-3 text-center">
+        <h1 className=" md:pt-5 text-3xl md:text-4xl lg:text-5xl font-bold my-4">Latest work</h1>
       </div>
 
       <div

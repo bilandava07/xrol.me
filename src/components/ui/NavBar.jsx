@@ -79,14 +79,14 @@ function Navbar({ darkMode, setDarkMode }) {
                     <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
 
                     {/* Mobile Menu (hamburger) */}
-                    <div className="md:hidden">
+                    <div className="md:hidden   ">
                         <Sheet open={open} onOpenChange={setOpen}>
                             <SheetTrigger asChild>
                                 <Button variant="ghost" size="icon">
                                     <Menu className="w-6 h-6" />
                                 </Button>
                             </SheetTrigger>
-                            <SheetContent side="right" className="p-6 space-y-4">
+                            <SheetContent side="right" className="p-6 space-y-4 max-w-[50vw]">
                                 <SheetHeader>
                                     <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
                                     <SheetDescription className="sr-only">

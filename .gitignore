@@ -27,4 +27,4 @@ dist-ssr
 build_and_copy_dist_to_deployment.sh
 public
 
-data/photos.js
+src/data

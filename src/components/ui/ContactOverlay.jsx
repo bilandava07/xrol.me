@@ -2,7 +2,30 @@ import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import ContactForm from './ContactForm';
 
-function ContactOverlay({contactOverlay, handleCloseContactOverlay}) {
+function ContactOverlay({ contactOverlay, handleCloseContactOverlay }) {
+
+
+  // Define the function here
+  const handleSubmit = async (formData) => {
+    try {
+      const res = await fetch("https://xrol.me/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success) {
+        alert("Message sent successfully!");
+        handleCloseContactOverlay();
+      } else {
+        alert("Failed to send message: " + (data.error || "Unknown error"));
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Failed to send message: " + err.message);
+    }
+  };
+
   return (
     <AnimatePresence>
       {contactOverlay && (
@@ -47,7 +70,11 @@ function ContactOverlay({contactOverlay, handleCloseContactOverlay}) {
               className="pointer-events-auto w-[85vw] sm:w-5/6 md:w-4/6 lg:w-2/3 xl:w-3/7"
               onClick={(e) => e.stopPropagation()}
             >
-                <ContactForm />
+              <ContactForm
+                onSubmit={handleSubmit}
+                onCancel={handleCloseContactOverlay}
+              />
+
             </div>
           </motion.div>
         </>

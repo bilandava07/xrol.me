@@ -54,7 +54,9 @@ export default function PortfolioGrid({ photos, onPhotoClick }) {
 
       <div className="
           grid
-          gap-7                
+          gap-2
+          md:gap-4
+          lg:gap-7                
           grid-flow-dense
           [grid-template-columns:repeat(auto-fit,minmax(clamp(150px,20%,280px),1fr))]
           [grid-auto-rows:auto]

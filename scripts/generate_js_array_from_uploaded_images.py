@@ -1,16 +1,16 @@
-import os
-import json
+from get_metadata import get_cr3_dng_metadata
 from PIL import Image
-from get_metadata import get_cr3_dng_metadata  # keep your existing function
+import shutil
+import json
+import os
 
 # Base directory of the script
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-JS_FILE = "src/data/photos.js"          
-BASE_DIR = os.path.join(SCRIPT_DIR, "..", "public/images")
-OUTPUT_JSON = os.path.join(SCRIPT_DIR, "..", "src/data/photos.json")
+INCOMING_DIR = os.path.join(SCRIPT_DIR, "..", "incoming_photos")
 
-os.makedirs(os.path.dirname(OUTPUT_JSON), exist_ok=True)
+JS_FILE = "src/data/photos.js"
+BASE_DIR = os.path.join(SCRIPT_DIR, "..", "public/images")
 
 CATEGORY_FOLDERS = {
     "nature": "Nature & Landscapes",
@@ -22,22 +22,32 @@ photos = []
 photo_id = 1
 
 for folder, category in CATEGORY_FOLDERS.items():
-    folder_path = os.path.join(BASE_DIR, folder)
-    if not os.path.exists(folder_path):
+    incoming_folder_path = os.path.join(
+        INCOMING_DIR, folder)       # <- read RAWs from here
+    
+    public_folder_path = os.path.join(
+        BASE_DIR, folder)            # <- copy JPGs here
+    os.makedirs(public_folder_path, exist_ok=True)
+
+    if not os.path.exists(incoming_folder_path):
         continue
 
-    for filename in os.listdir(folder_path):
+    for filename in os.listdir(incoming_folder_path):
         # Only process original RAW files for metadata
         if filename.lower().endswith(('.cr3', '.dng')):
             original_image_base = filename.rsplit('.', 1)[0].lower()
-            original_file_path = os.path.join(folder_path, filename)
+            original_file_path = os.path.join(incoming_folder_path, filename)
             metadata = get_cr3_dng_metadata(original_file_path)
 
             # Look for corresponding production image
-            for prod_filename in os.listdir(folder_path):
+            for prod_filename in os.listdir(incoming_folder_path):
                 prod_base, ext = prod_filename.lower().rsplit('.', 1)
                 if ext in ("jpg", "jpeg", "png") and prod_base.startswith(original_image_base):
-                    prod_file_path = os.path.join(folder_path, prod_filename)
+                    prod_file_path = os.path.join(
+                        incoming_folder_path, prod_filename)
+
+                    # copy JPG/PNG to public folder
+                    shutil.copy2(prod_file_path, public_folder_path)
 
                     # Open JPG/PNG to determine displayed orientation
                     with Image.open(prod_file_path) as img:
@@ -68,6 +78,7 @@ for folder, category in CATEGORY_FOLDERS.items():
                         "orientation": orientation    # new field from JPG
                     })
                     photo_id += 1
+
 
 # Convert JSON to JS array string
 js_array_content = json.dumps(photos, indent=4, ensure_ascii=False)

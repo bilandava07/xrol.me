@@ -28,3 +28,4 @@ build_and_copy_dist_to_deployment.sh
 public
 
 src/data
+scripts/__pycache__

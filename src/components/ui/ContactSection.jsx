@@ -12,7 +12,7 @@ function ContactSection({ handleOpenContactOverlay }) {
         {/* Social Icons */}
         <div className="flex space-x-6 md:mb-0">
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/v__wow/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:scale-110 transition-transform duration-300"
@@ -20,21 +20,22 @@ function ContactSection({ handleOpenContactOverlay }) {
             <SiInstagram className="w-7 h-7 md:w-7 md:h-10" />
           </a>
           <a
-            href="https://t.me"
+            href="https://t.me/Xsat1n"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:scale-110 transition-transform duration-300"
           >
             <SiTelegram className="w-7 h-7 md:w-7 md:h-10" />
           </a>
-          <a
+
+          {/* <a
             href="https://youtube.com"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:scale-110 transition-transform duration-300"
           >
             <SiYoutube className="w-7 h-7 md:w-8 md:h-10" />
-          </a>
+          </a> */}
 
 
         </div>

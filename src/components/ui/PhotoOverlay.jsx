@@ -1,7 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 
 function PhotoOverlay({ selectedPhoto, handleCloseOverlay }) {
+
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
     <AnimatePresence>
       {selectedPhoto && (
@@ -42,52 +46,31 @@ function PhotoOverlay({ selectedPhoto, handleCloseOverlay }) {
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
           >
-            <div className="relative pointer-events-auto text-white max-w-full">
+            {/* Outer container: limits height & makes content scrollable if too tall */}
+            <div className="relative pointer-events-auto text-white max-h-[85vh] w-full max-w-[85vw] md:max-w-[70vw] flex flex-col lg:flex-row items-start gap-6">
 
               {/* IMAGE */}
               <img
                 src={selectedPhoto.fullResUrl}
                 alt={selectedPhoto.title}
-                className=" max-h-[85vh]  max-w-[85vw] md:max-w-[70vw] rounded-lg shadow-lg mx-auto"
+                className="max-h-[60vh] lg:max-h-[85vh] w-full lg:w-auto object-contain rounded-lg shadow-lg mx-auto"
                 onClick={(e) => e.stopPropagation()}
+                onLoad={() => setImageLoaded(true)}
               />
 
               {/* METADATA */}
-              <div
-                className="
-                mt-6                      /* mobile & tablet: below image */
-
-                lg:mt-0                   /* desktop: remove margin */
-                lg:text-left              /* desktop: align left */
-                
-                lg:absolute               /* desktop: position beside image */
-                lg:top-0                 
-                lg:left-full              /* desktop: to right edge of image */
-                lg:ml-6                   /* spacing */
-                w-max
-              "
-              >
-                <h2 className=" text-base lg:text-xl font-semibold mb-4">{selectedPhoto.title}</h2>
-
-                <div className="space-y-2 text-xs md:text-sm w-max">
-                  {selectedPhoto.metadata?.ISO && (
-                    <p><span className="font-medium">ISO:</span> {selectedPhoto.metadata.ISO}</p>
-                  )}
-                  {selectedPhoto.metadata?.ShutterSpeed && (
-                    <p><span className="font-medium">Shutter:</span> {selectedPhoto.metadata.ShutterSpeed}</p>
-                  )}
-                  {selectedPhoto.metadata?.Aperture && (
-                    <p><span className="font-medium">Aperture:</span> f/{selectedPhoto.metadata.Aperture}</p>
-                  )}
-                  {selectedPhoto.metadata?.LensModel && (
-                    <p><span className="font-medium">Lens:</span> {selectedPhoto.metadata.LensModel}</p>
-                  )}
-                  {selectedPhoto.metadata?.CameraModel && (
-                    <p><span className="font-medium">Camera:</span> {selectedPhoto.metadata.CameraModel}</p>
-                  )}
+              {imageLoaded && (
+                <div className="mt-4 lg:mt-0 text-left w-full lg:w-auto">
+                  <h2 className="text-base lg:text-xl font-semibold mb-4">{selectedPhoto.title}</h2>
+                  <div className="space-y-2 text-xs md:text-base">
+                    {selectedPhoto.metadata?.ISO && <p><span className="font-medium">ISO:</span> {selectedPhoto.metadata.ISO}</p>}
+                    {selectedPhoto.metadata?.ShutterSpeed && <p><span className="font-medium">Shutter:</span> {selectedPhoto.metadata.ShutterSpeed}</p>}
+                    {selectedPhoto.metadata?.Aperture && <p><span className="font-medium">Aperture:</span> f/{selectedPhoto.metadata.Aperture}</p>}
+                    {selectedPhoto.metadata?.LensModel && <p><span className="font-medium">Lens:</span> {selectedPhoto.metadata.LensModel}</p>}
+                    {selectedPhoto.metadata?.CameraModel && <p><span className="font-medium">Camera:</span> {selectedPhoto.metadata.CameraModel}</p>}
+                  </div>
                 </div>
-              </div>
-
+              )}
             </div>
           </motion.div>
 

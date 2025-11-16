@@ -18,14 +18,14 @@ function PhotoCard({ title, id, imageUrl, onClick, orientation }) {
       viewport={{ once: false, amount: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
     >
-      <Card className="h-full" onClick={onClick}>
+      <Card className="h-full rounded-lg overflow-hidden" onClick={onClick}>
 
-        <CardContent className="p-0 h-full">
+        <CardContent className="p-0 h-full rounded-lg">
           <div className="relative w-full h-full group">
             <img
               src={imageUrl}
               alt={title}
-              className="w-full h-full object-cover rounded-lg transform transition-transform duration-700 group-hover:scale-110"
+              className="w-full h-full object-cover  transform transition-transform duration-700 group-hover:scale-110"
             />
 
             {/* Dark overlay */}

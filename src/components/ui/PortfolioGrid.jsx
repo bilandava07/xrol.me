@@ -8,19 +8,41 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function PortfolioGrid({ photos, onPhotoClick }) {
 
+  function shufflePhotos(photos) {
+    // Group photos by category
+    const photosByCategory = {};
+    photos.forEach((photo) => {
+      if (!photosByCategory[photo.category]) photosByCategory[photo.category] = [];
+      photosByCategory[photo.category].push(photo);
+    });
+
+    const categories = Object.keys(photosByCategory);
+    const result = [];
+    let done = false;
+
+    while (!done) {
+      done = true; // assume we are done
+      categories.forEach((cat) => {
+        if (photosByCategory[cat].length > 0) {
+          result.push(photosByCategory[cat].shift()); // take one photo
+          done = false; // there’s still more photos to process
+        }
+      });
+    }
+
+    return result;
+  }
+
 
 
   const [selectedCategory, setSelectedCategory] = useState(CATEGORIES.ALL);
 
   // Filter photos based on selected category
   // true means keep the photo, false means skip the photo
-  const filteredPhotos = photos.filter((photo) =>
+  const filteredPhotos =
     selectedCategory === CATEGORIES.ALL
-      ? true
-      : photo.category === selectedCategory
-  );
-
-
+      ? shufflePhotos(photos)
+      : photos.filter((photo) => photo.category === selectedCategory);
 
 
   return (

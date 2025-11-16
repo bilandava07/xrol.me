@@ -47,9 +47,21 @@ function Navbar({ darkMode, setDarkMode }) {
                 }`}></div>
 
             {/* Content */}
-            <div className={`absolute inset-0 flex items-center justify-between px-4 md:px-8 ${isScrolled ? "text-foreground/90" : "text-white/90"}`}>
-                {/* Logo */}
-                <div className="text-2xl font-bold">MyLogo</div>
+            <div className={`absolute h-[100%] inset-0 flex items-center justify-between px-4 md:px-8 ${isScrolled ? "text-foreground/90" : "text-white/90"}`}>
+                {/* Logo img */}
+                <a href="#hero" className="h-[80%] md:h-[100%]">
+
+                    <img
+                        src="/images/vova_icon_compressed.png"
+                        className=" h-full object-contain"
+                        alt="Logo"
+                    />
+
+                </a>
+
+
+
+
 
                 {/* Right Section: Links + ThemeToggle + Mobile Menu */}
                 <div className="flex items-center space-x-1 md:space-x-6">

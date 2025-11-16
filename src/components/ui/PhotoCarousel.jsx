@@ -11,7 +11,7 @@ function PhotoCarousel({ photos, onPhotoClick }) {
   let latest_photos = photos.slice(0, 6);
 
   const plugin = React.useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: true })
+    Autoplay({ delay: 4000, stopOnInteraction: true})
   );
 
   return (
@@ -28,8 +28,6 @@ function PhotoCarousel({ photos, onPhotoClick }) {
 
       <div
         className="w-full overflow-hidden bg-transparent my-4"
-        onMouseEnter={() => plugin.current.stop()}
-        onMouseLeave={() => plugin.current.play()}
       >
         <Carousel
           plugins={[plugin.current]}

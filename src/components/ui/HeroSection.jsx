@@ -16,7 +16,10 @@ function HeroSection({ imageUrl, title }) {
             {/* Background image as motion div */}
             <motion.div
                 className="absolute inset-0 bg-center bg-cover"
-                style={{ backgroundImage: `url(${imageUrl})` }}
+                style={{
+                    backgroundImage: `url(${imageUrl})`,
+                    backgroundPosition: "right bottom" // focus on bottom-right
+                }}
                 initial={{ scale: 1 }}
                 animate={isLoaded ? { scale: 1.08 } : { scale: 1 }}
                 transition={{ duration: 5, ease: "easeOut" }}

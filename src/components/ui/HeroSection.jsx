@@ -1,9 +1,16 @@
-import { animate, scale } from 'framer-motion';
-import React from 'react';
-
 import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
 
 function HeroSection({ imageUrl, title }) {
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    // Preload the image
+    useEffect(() => {
+        const img = new Image();
+        img.src = imageUrl;
+        img.onload = () => setIsLoaded(true);
+    }, [imageUrl]);
+
     return (
         <section className="relative w-full h-screen overflow-hidden">
             {/* Background image as motion div */}
@@ -11,7 +18,7 @@ function HeroSection({ imageUrl, title }) {
                 className="absolute inset-0 bg-center bg-cover"
                 style={{ backgroundImage: `url(${imageUrl})` }}
                 initial={{ scale: 1 }}
-                animate={{ scale: 1.08 }} // slightly zoom in
+                animate={isLoaded ? { scale: 1.08 } : { scale: 1 }}
                 transition={{ duration: 5, ease: "easeOut" }}
             />
 
@@ -21,23 +28,17 @@ function HeroSection({ imageUrl, title }) {
             {/* Centered text */}
             <div className="relative z-10 flex items-center justify-center h-full">
                 <motion.div
-                    initial={{ opacity: 0 }}            
-                    whileInView={{ opacity: 1 }}       
-                    viewport={{ once: true }}
-                    transition={{ duration: 5, ease: "easeOut" }} 
+                    initial={{ opacity: 0 }}
+                    animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
+                    transition={{ duration: 5, ease: "easeOut" }}
                 >
                     <h1 className="text-white/75 text-4xl sm:text-5xl md:text-6xl font-bold text-center px-4">
                         {title}
                     </h1>
                 </motion.div>
             </div>
-
-
-
-        </section >
-
-
+        </section>
     );
 }
 
-export default HeroSection
+export default HeroSection;

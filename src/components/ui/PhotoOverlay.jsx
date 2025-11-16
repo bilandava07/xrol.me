@@ -48,7 +48,7 @@ function PhotoOverlay({ selectedPhoto, handleCloseOverlay }) {
               <img
                 src={selectedPhoto.fullResUrl}
                 alt={selectedPhoto.title}
-                className=" max-h-[85vh] max-w-[70vw] rounded-lg shadow-lg mx-auto"
+                className=" max-h-[85vh]  max-w-[85vw] md:max-w-[70vw] rounded-lg shadow-lg mx-auto"
                 onClick={(e) => e.stopPropagation()}
               />
 

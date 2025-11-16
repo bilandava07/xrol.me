@@ -40,23 +40,7 @@ function ContactOverlay({ contactOverlay, handleCloseContactOverlay }) {
             onClick={handleCloseContactOverlay}
           />
 
-          {/* Close button */}
-          <motion.div
-            className="fixed top-4 right-4 z-50"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-          >
-            <Button
-              className="rounded-4xl cursor-pointer"
-              size="sm"
-              variant="secondary"
-              onClick={handleCloseContactOverlay}
-            >
-              X
-            </Button>
-          </motion.div>
+
 
           {/* Contact form container */}
           <motion.div

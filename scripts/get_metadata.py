@@ -1,7 +1,7 @@
 import json
 import subprocess
 
-def get_cr3_metadata(filepath):
+def get_cr3_dng_metadata(filepath):
     result = subprocess.run(
         ["exiftool", "-json", filepath],
         stdout=subprocess.PIPE,

@@ -52,7 +52,15 @@ export default function PortfolioGrid({ photos, onPhotoClick }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-2 lg:gap-6 py-6">
+      <div className="
+          grid
+          gap-7                
+          grid-flow-dense
+          [grid-template-columns:repeat(auto-fit,minmax(clamp(150px,20%,280px),1fr))]
+          [grid-auto-rows:auto]
+          box-border
+          max-w-full
+        ">
         <AnimatePresence>
           {filteredPhotos.map((photo) => (
             <PhotoCard
@@ -60,6 +68,7 @@ export default function PortfolioGrid({ photos, onPhotoClick }) {
               id={photo.id}
               title={photo.title}
               imageUrl={photo.imageUrl}
+              orientation={photo.orientation}
               onClick={() => onPhotoClick(photo)}
             />
           ))}

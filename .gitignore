@@ -29,3 +29,5 @@ public
 
 src/data
 scripts/__pycache__
+
+incoming_photos

@@ -1,6 +1,6 @@
 import os
 import json
-from get_metadata import get_cr3_metadata
+from get_metadata import get_cr3_dng_metadata
 
 # Base directory of the script
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -31,14 +31,14 @@ for folder, category in CATEGORY_FOLDERS.items():
         continue
 
     for filename in os.listdir(folder_path):
-
-        if filename.lower().endswith('.cr3'):
+        
+        if filename.lower().endswith(('.cr3', '.dng'))  :
             # found original photo to extract metadata from
             
             original_image_base = filename.rsplit('.', 1)[0].lower()
 
             original_file_path = os.path.join(folder_path, filename)
-            metadata = get_cr3_metadata(original_file_path)
+            metadata = get_cr3_dng_metadata(original_file_path)
 
             print(metadata)
 

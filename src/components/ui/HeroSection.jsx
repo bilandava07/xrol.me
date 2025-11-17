@@ -18,7 +18,7 @@ function HeroSection({ imageUrl, title }) {
                 className="absolute inset-0 bg-center bg-cover"
                 style={{
                     backgroundImage: `url(${imageUrl})`,
-                    backgroundPosition: "right bottom" // focus on bottom-right
+                    backgroundPosition: "right " // focus on bottom-right
                 }}
                 initial={{ scale: 1 }}
                 animate={isLoaded ? { scale: 1.08 } : { scale: 1 }}

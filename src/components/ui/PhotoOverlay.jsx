@@ -1,10 +1,20 @@
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Spinner } from '@/components/ui/spinner';
 
 function PhotoOverlay({ selectedPhoto, handleCloseOverlay }) {
 
   const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!selectedPhoto) return;
+    setImageLoaded(false);
+
+    const img = new Image();
+    img.src = selectedPhoto.fullResUrl;
+    img.onload = () => setImageLoaded(true);
+  }, [selectedPhoto]);
 
   return (
     <AnimatePresence>
@@ -50,28 +60,34 @@ function PhotoOverlay({ selectedPhoto, handleCloseOverlay }) {
             <div className="relative pointer-events-auto text-white max-h-[85vh] w-auto max-w-[85vw] md:max-w-[70vw] flex flex-col lg:flex-row items-start gap-6">
 
 
-              {/* IMAGE */}
-              <img
-                src={selectedPhoto.fullResUrl}
-                alt={selectedPhoto.title}
-                className="max-h-[60vh] lg:max-h-[85vh] w-auto rounded-lg shadow-lg "
-                onClick={(e) => e.stopPropagation()}
-                onLoad={() => setImageLoaded(true)}
-              />
+              {imageLoaded ? (
+                <>
+                  {/* IMAGE */}
+                  <img
+                    src={selectedPhoto.fullResUrl}
+                    alt={selectedPhoto.title}
+                    className="max-h-[60vh] lg:max-h-[85vh] w-auto rounded-lg shadow-lg"
+                    onClick={(e) => e.stopPropagation()}
+                  />
 
-              {/* METADATA */}
-              {imageLoaded && (
-                <div className="mt-4 lg:mt-0 text-left w-full lg:w-auto">
-                  <h2 className="text-base lg:text-xl font-semibold mb-4">{selectedPhoto.title}</h2>
-                  <div className="space-y-2 text-xs md:text-sm">
-                    {selectedPhoto.metadata?.ISO && <p><span className="font-medium">ISO:</span> {selectedPhoto.metadata.ISO}</p>}
-                    {selectedPhoto.metadata?.ShutterSpeed && <p><span className="font-medium">Shutter:</span> {selectedPhoto.metadata.ShutterSpeed}</p>}
-                    {selectedPhoto.metadata?.Aperture && <p><span className="font-medium">Aperture:</span> f/{selectedPhoto.metadata.Aperture}</p>}
-                    {selectedPhoto.metadata?.LensModel && <p><span className="font-medium">Lens:</span> {selectedPhoto.metadata.LensModel}</p>}
-                    {selectedPhoto.metadata?.CameraModel && <p><span className="font-medium">Camera:</span> {selectedPhoto.metadata.CameraModel}</p>}
+                  {/* METADATA */}
+                  <div className="mt-4 lg:mt-0 text-left w-full lg:w-auto">
+                    <h2 className="text-base lg:text-xl font-semibold mb-4">{selectedPhoto.title}</h2>
+                    <div className="space-y-2 text-xs md:text-sm">
+                      {selectedPhoto.metadata?.ISO && <p><span className="font-medium">ISO:</span> {selectedPhoto.metadata.ISO}</p>}
+                      {selectedPhoto.metadata?.ShutterSpeed && <p><span className="font-medium">Shutter:</span> {selectedPhoto.metadata.ShutterSpeed}</p>}
+                      {selectedPhoto.metadata?.Aperture && <p><span className="font-medium">Aperture:</span> f/{selectedPhoto.metadata.Aperture}</p>}
+                      {selectedPhoto.metadata?.LensModel && <p><span className="font-medium">Lens:</span> {selectedPhoto.metadata.LensModel}</p>}
+                      {selectedPhoto.metadata?.CameraModel && <p><span className="font-medium">Camera:</span> {selectedPhoto.metadata.CameraModel}</p>}
+                    </div>
                   </div>
+                </>
+              ) : (
+                <div className="flex items-center justify-center w-full h-[60vh] lg:h-[85vh]">
+                  <Spinner className="h-12 w-12 text-white" />
                 </div>
               )}
+
             </div>
           </motion.div>
 

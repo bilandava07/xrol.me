@@ -81,9 +81,12 @@ export default function PortfolioGrid({ photos, onPhotoClick }) {
           lg:gap-7                
           grid-flow-dense
           [grid-template-columns:repeat(auto-fit,minmax(clamp(150px,20%,280px),1fr))]
-          [grid-auto-rows:auto]
+          [grid-auto-rows:min-content]
           box-border
           max-w-full
+
+
+          lg:min-h-[50vw]
         ">
         <AnimatePresence>
           {filteredPhotos.map((photo) => (

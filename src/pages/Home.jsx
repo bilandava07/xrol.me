@@ -107,7 +107,7 @@ function Home() {
 
                 <div id="portfolio" className='sd:scroll-mt-5 md:scroll-mt-0 lg:scroll-mt-0'>
 
-                    <PortfolioGrid photos={photos} selectedPhoto={selectedPhoto} onPhotoClick={handlePhotoClick} />
+                    <PortfolioGrid photos={photos} onPhotoClick={handlePhotoClick} />
 
                 </div>
 

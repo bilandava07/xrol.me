@@ -43,7 +43,7 @@ for folder, category in CATEGORY_FOLDERS.items():
 
     for filename in os.listdir(incoming_folder_path):
         # Only process original RAW files for metadata
-        if filename.lower().endswith(('.cr3', '.dng')):
+        if filename.lower().endswith(('.cr3', '.dng', '.arw')):
             original_image_base = filename.rsplit('.', 1)[0].lower()
             original_file_path = os.path.join(incoming_folder_path, filename)
             metadata = get_cr3_dng_metadata(original_file_path)
@@ -100,7 +100,13 @@ for folder, category in CATEGORY_FOLDERS.items():
 
                     # Build title
                     parts = prod_base.split('_')
-                    title_parts = parts[2:] if len(parts) > 2 else parts
+                    # IMG_0988_NAME.jpg format has 3 parts
+                    if len(parts) > 2:
+                        title_parts = parts[2:]
+                    # DSC04101_spruce.jpg only has two parts  
+                    elif len(parts) > 1:
+                        title_parts = parts[1:]
+                            
                     if title_parts:
                         title_parts[0] = title_parts[0].capitalize()
                     title = " ".join(title_parts) if title_parts else prod_base

@@ -100,15 +100,19 @@ for folder, category in CATEGORY_FOLDERS.items():
 
                     # Build title
                     parts = prod_base.split('_')
-                    # IMG_0988_NAME.jpg format has 3 parts
-                    if len(parts) > 2:
-                        title_parts = parts[2:]
-                    # DSC04101_spruce.jpg only has two parts  
-                    elif len(parts) > 1:
+                    
+                    # The new SONY camera files DSC023_NAME.ARW
+                    if parts[0].startswith("dsc"):
                         title_parts = parts[1:]
-                            
-                    if title_parts:
-                        title_parts[0] = title_parts[0].capitalize()
+                        
+                    # Old canon camera format and drone photos format
+                    elif parts[0].startswith("img") or parts[0].startswith("dji"):
+                        title_parts = parts[2:]
+                        
+                    # Capitalize each word of the title
+                    for i, title_part in enumerate(title_parts):
+                        title_parts[i] = title_part.capitalize()
+                        
                     title = " ".join(title_parts) if title_parts else prod_base
 
                     production_image_url = f"/images/{folder}/{prod_filename}"
@@ -129,6 +133,7 @@ for folder, category in CATEGORY_FOLDERS.items():
 
 # Convert JSON to JS array string
 js_array_content = json.dumps(photos, indent=4, ensure_ascii=False)
+
 
 # Wrap in JS module with CATEGORIES import
 js_content = f"""import {{ CATEGORIES }} from "@/constants/photo_categories";

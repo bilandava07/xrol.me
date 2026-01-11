@@ -57,7 +57,7 @@ function PhotoOverlay({ selectedPhoto, handleCloseOverlay }) {
             transition={{ duration: 0.3, ease: 'easeInOut' }}
           >
             {/* Outer container: limits height & makes content scrollable if too tall */}
-            <div className="relative pointer-events-auto text-white max-h-[85vh] w-auto max-w-[85vw] md:max-w-[70vw] flex flex-col lg:flex-row items-start gap-6">
+            <div className="relative pointer-events-auto text-white max-h-[85vh] w-auto max-w-[90vw] md:max-w-[70vw] 2xl:max-w-[90vw] flex flex-col lg:flex-row items-start gap-6">
 
 
               {imageLoaded ? (

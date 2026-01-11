@@ -56,6 +56,11 @@ for folder, category in CATEGORY_FOLDERS.items():
                     prod_file_path = os.path.join(
                         incoming_folder_path, prod_filename)
                     
+                    # Get the "last modified" time to then use it to sort the images
+                    # Get "publish date" from JPEG modified time
+                    # returns a Unix timestamp (seconds since 1970)
+                    last_modified_time = os.path.getmtime(prod_file_path)
+                    
                     
                     # Full-resolution output path
                     fullres_output_path = os.path.join(public_folder_path, prod_filename)
@@ -125,7 +130,8 @@ for folder, category in CATEGORY_FOLDERS.items():
                         "fullResUrl": f"/images/{folder}/{prod_filename}",           # full-res
                         "category": category,
                         "metadata": metadata,
-                        "orientation": orientation
+                        "orientation": orientation,
+                        "lastModifiedTime": last_modified_time
                     })
                     photo_id += 1
                     
@@ -139,6 +145,8 @@ js_array_content = json.dumps(photos, indent=4, ensure_ascii=False)
 js_content = f"""import {{ CATEGORIES }} from "@/constants/photo_categories";
 
 const photos = {js_array_content};
+
+
 
 export default photos;
 """

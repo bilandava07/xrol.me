@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 
 
-import photos from "@/data/photos.js";
+import photos_js_array from "@/data/photos.js";
 import HeroSection from '@/components/ui/HeroSection';
 import Navbar from '@/components/ui/NavBar';
 import PhotoCarousel from '@/components/ui/PhotoCarousel';
@@ -26,6 +26,8 @@ function Home() {
 
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [contactOverlay, setContactOverlay] = useState(false)
+
+    const photos = photos_js_array.sort((a,b) => b.lastModifiedTime - a.lastModifiedTime);
 
     const [darkMode, setDarkMode] = useState(() => {
         // Check if the user has a stored preference first
